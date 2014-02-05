@@ -4,10 +4,12 @@ var items = [];
 var server = http.createServer(function(req, res) {
   switch (req.method) {
   	case 'GET':
-		items.forEach(function(item, i){
-  			res.write(i + ') ' + item + '\n');
-		});
-		res.end();
+		var body = items.map(function(item, i){
+  			return i + ') ' + item;
+		}).join('\n');
+		res.setHeader('Content-Length', Buffer.byteLength(body));
+		res.setHeader('Content-Type', 'text/plain; charset="utf-8"');
+		res.end(body);
 		break;
 
   	case 'POST':
