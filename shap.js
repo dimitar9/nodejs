@@ -1,30 +1,15 @@
-function Shape() {
-}
+var fs = require('fs');
 
-Shape.prototype.X = 0;
-Shape.prototype.Y = 0;
-
-Shape.prototype.move = function (x,y) {
-	this.X = x; 
-	this.Y = y;
-}
-Shape.prototype.distance_from_origin = function() {
-	return Math.sqrt(this.X * this.X + this.Y * this.Y);
-}
-
-var s = new Shape();
-s.move(10,10);
-console.log(s.distance_from_origin());
-
-
-function printit(var_name) {
-    console.log(global[var_name]);
-}
-
-global.fish = "swordfish";
-global.pet = "cat";
-
-printit("fish");  // prints swordfish
-printit("pet");    // prints cat
-printit("fruit"); // prints undefined
-
+fs.open(
+    'info.txt', 'r',
+    function (err, handle) {     // we'll see more about the err param in a bit
+        var buf = new Buffer(100000);
+        fs.read(
+            handle, buf, 0, 100000, null,
+            function (err, length) {
+                console.log(buf.toString('utf8', 0, length));
+                fs.close(handle, function () { /* don't care */ });
+            }
+        );
+    }
+);
