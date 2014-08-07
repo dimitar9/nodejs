@@ -81,15 +81,15 @@ function load_file_contents2(path, callback) {
 
 
 
-load_file_contents(
-    "test.txt",
-    function (err, contents) {
-        if (err)
-            console.log(err);
-        else
-            console.log(contents);
-    }
-);
+//load_file_contents(
+//    "test.txt",
+//    function (err, contents) {
+//        if (err)
+//            console.log(err);
+//        else
+//            console.log(contents);
+//    }
+//);
 
 load_file_contents2(
     "test.txt",
